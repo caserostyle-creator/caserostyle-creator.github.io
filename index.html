@@ -32,9 +32,18 @@
   <div>
     <div class="ciclo" id="ciclo">
       <svg viewBox="0 0 400 400" aria-hidden="true">
-        <circle class="anillo-glow" cx="200" cy="200" r="150" fill="none" stroke="#f3c98a" stroke-width="30" stroke-dasharray="6 14" stroke-linecap="round" opacity=".35"/>
-        <circle class="anillo" cx="200" cy="200" r="150" fill="none" stroke="#e2a95a" stroke-width="20" stroke-dasharray="6 14" stroke-linecap="round"/>
-        <circle cx="200" cy="200" r="122" fill="none" stroke="#8fbf9f" stroke-width="2" stroke-dasharray="2 10" opacity=".5"/>
+        <defs>
+          <linearGradient id="barrido" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#e2a95a" stop-opacity="0"/><stop offset="1" stop-color="#ffd58a"/></linearGradient>
+        </defs>
+        <!-- anillo base donde se apoyan los íconos -->
+        <circle cx="200" cy="200" r="150" fill="none" stroke="#e2a95a" stroke-width="2" opacity=".85"/>
+        <!-- anillos finos que giran a distintas velocidades -->
+        <circle class="g1" cx="200" cy="200" r="150" fill="none" stroke="#f3c98a" stroke-width="5" stroke-dasharray="2 26" stroke-linecap="round" opacity=".9"/>
+        <circle class="g2" cx="200" cy="200" r="138" fill="none" stroke="#8fbf9f" stroke-width="1.5" stroke-dasharray="1 9" opacity=".7"/>
+        <circle class="g3" cx="200" cy="200" r="164" fill="none" stroke="#e2a95a" stroke-width="1" stroke-dasharray="40 14 4 14" opacity=".45"/>
+        <circle class="g4" cx="200" cy="200" r="124" fill="none" stroke="#8fbf9f" stroke-width="1" stroke-dasharray="8 8" opacity=".3"/>
+        <!-- destello que recorre el ciclo -->
+        <circle class="barrido" cx="200" cy="200" r="150" fill="none" stroke="url(#barrido)" stroke-width="4" stroke-dasharray="150 792" stroke-linecap="round"/>
       </svg>
       <div class="centro"><img src="img/porta-matera.jpg" alt="Porta matera en madera recuperada, EcoDeco"></div>
     </div>

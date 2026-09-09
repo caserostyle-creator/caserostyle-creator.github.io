@@ -33,12 +33,13 @@ h1 span{color:var(--acento)}
 
 /* Ciclo */
 .ciclo{position:relative;aspect-ratio:1/1;max-width:480px;margin:0 auto;width:100%}
-.ciclo svg{width:100%;height:100%;overflow:visible;filter:drop-shadow(0 0 18px rgba(226,169,90,.28))}
-.anillo,.anillo-glow{transform-origin:200px 200px;animation:gira 120s linear infinite}
-.anillo-glow{filter:blur(5px)}
+.ciclo svg{width:100%;height:100%;overflow:visible;filter:drop-shadow(0 0 12px rgba(226,169,90,.35))}
+.ciclo svg circle{transform-origin:200px 200px}
+.g1{animation:gira 90s linear infinite}.g2{animation:gira 60s linear infinite reverse}.g3{animation:gira 140s linear infinite}.g4{animation:gira 200s linear infinite reverse}
+.barrido{animation:gira 8s cubic-bezier(.4,0,.6,1) infinite;filter:drop-shadow(0 0 6px rgba(255,213,138,.9))}
 @keyframes gira{to{transform:rotate(360deg)}}
 .ciclo .c{position:absolute;transform:translate(-50%,-50%);text-align:center;width:104px;font-size:12.5px;font-weight:700;line-height:1.25;z-index:2}
-.ciclo .c i{display:grid;place-items:center;width:64px;height:64px;border-radius:50%;background:#fff;border:4px solid var(--acento);margin:0 auto 6px;font-size:28px;font-style:normal;box-shadow:0 10px 24px rgba(0,0,0,.35),0 0 0 6px rgba(226,169,90,.18);transition:transform .25s var(--curva),box-shadow .25s;cursor:pointer;will-change:transform}
+.ciclo .c i{display:grid;place-items:center;width:60px;height:60px;border-radius:50%;background:#fff;border:2.5px solid var(--acento);margin:0 auto 6px;font-size:28px;font-style:normal;box-shadow:0 10px 24px rgba(0,0,0,.35),0 0 0 6px rgba(226,169,90,.18);transition:transform .25s var(--curva),box-shadow .25s;cursor:pointer;will-change:transform}
 .ciclo .c:hover,.ciclo .c.activo{z-index:10}
 .ciclo .c:hover i,.ciclo .c.activo i{transform:scale(1.18);box-shadow:0 0 0 10px rgba(226,169,90,.28),0 0 40px rgba(226,169,90,.5),0 14px 30px rgba(0,0,0,.4)}
 .ciclo .c span{display:block;text-shadow:0 2px 8px rgba(0,0,0,.6)}
@@ -48,7 +49,7 @@ h1 span{color:var(--acento)}
 .ciclo .c.izq .info{left:auto;right:calc(100% - 6px);transform:translateY(-50%) translateX(-8px)}
 .ciclo .c.izq .info:before{left:auto;right:-7px;border-right:0;border-left:7px solid #fff}
 .ciclo .c:hover .info,.ciclo .c.activo .info{opacity:1;transform:translateY(-50%) translateX(0);pointer-events:auto}
-.ciclo .centro{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:180px;height:180px;border-radius:50%;overflow:hidden;border:6px solid #fff;box-shadow:0 14px 40px rgba(0,0,0,.45),0 0 0 8px rgba(226,169,90,.15);z-index:1}
+.ciclo .centro{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:172px;height:172px;border-radius:50%;overflow:hidden;border:3px solid #fff;box-shadow:0 14px 40px rgba(0,0,0,.45),0 0 0 10px rgba(226,169,90,.12),0 0 0 11px rgba(226,169,90,.35);z-index:1}
 .ciclo .centro img{width:100%;height:100%;object-fit:cover}
 .ciclo-pista{text-align:center;font-size:12.5px;color:var(--gris);margin-top:6px}
 
@@ -303,5 +304,5 @@ footer button{background:none;border:0;color:var(--eucalipto);font-weight:700;pa
 @media(max-width:560px){.tarjetas-obj,.autores-grid,.tiempo{grid-template-columns:1fr}.top .pill{display:none}.datos div{min-width:100%}}
 @media (prefers-reduced-motion: reduce){
   .expandida,.expandida .contenido,.lienzo,.b,.ciclo .c i,.ciclo .info,.tabs button,.tiras button{transition:none !important}
-  .anillo,.anillo-glow{animation:none}
+  .ciclo svg circle{animation:none}
 }
