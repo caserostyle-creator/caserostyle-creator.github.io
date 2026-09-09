@@ -53,7 +53,7 @@
     abierta = { e, origen };
     document.documentElement.style.setProperty("--nav-h", $(".nav").offsetHeight + "px");
     void e.offsetWidth; // fuerza el cálculo de la posición inicial antes de animar
-    setTimeout(() => e.classList.add("abierta"), 30);
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) e.classList.add("abierta"); else setTimeout(() => e.classList.add("abierta"), 30);
     e.querySelector(".cerrar").onclick = () => cerrar();
     document.body.style.overflow = "hidden";
     return e;
@@ -98,8 +98,14 @@
       $("#tabs", e).addEventListener("click", ev => { const b = ev.target.closest("button"); if (!b) return; $("#tabs .on", e)?.classList.remove("on"); b.classList.add("on"); pintarProyecto(b.dataset.p); });
     }
   }
+  function ajustarVisor() {
+    const v = $("#visor"), cab = $(".det.proyectos .cab"); if (!v || !cab || !abierta) return;
+    v.style.height = window.innerWidth > 900 ? (abierta.e.clientHeight - cab.offsetHeight) + "px" : "";
+  }
+  window.addEventListener("resize", ajustarVisor);
   function pintarProyecto(id) {
     const f = PR[id], v = $("#visor"); if (!v) return;
+    ajustarVisor(); setTimeout(ajustarVisor, 60); setTimeout(ajustarVisor, 500);
     let k = f.imgs.length - 1;
     const pinta = () => {
       v.innerHTML = `<div class="visor"><div class="escena"><div class="grande"><img src="${I + f.imgs[k][0]}" alt="${f.imgs[k][1]}"><span>${k + 1} / ${f.imgs.length} · ${f.imgs[k][1]}</span></div><div class="tiras">${f.imgs.map(([s, c], i) => `<button type="button" data-k="${i}" class="${i === k ? "on" : ""}" title="${c}"><img src="${I + s}" alt=""></button>`).join("")}</div></div>
@@ -130,6 +136,6 @@
   // Enlaces directos: ?paso=8 o ?proyecto=cava
   const q = new URLSearchParams(location.search);
   if (q.get("paso")) setTimeout(() => ir(+q.get("paso"), true), 300);
-  if (q.get("proyecto") && PR[q.get("proyecto")]) setTimeout(() => bento.querySelector(`.b[data-foto="${q.get("proyecto")}"]`).click(), 300);
+  if (q.get("proyecto") && PR[q.get("proyecto")]) setTimeout(() => { const b = bento.querySelector(`.b[data-foto="${q.get("proyecto")}"]`); if (b) b.click(); else { actual = 8; pintar(); mostrarPaso(8, q.get("proyecto")); } }, 300);
   if (q.get("ciclo")) setTimeout(() => ciclo.querySelector(`.c[data-i="${q.get("ciclo")}"]`).classList.add("activo"), 300);
 })();

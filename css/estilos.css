@@ -159,8 +159,8 @@ details.ante .grupo b{color:var(--carta-tinta)}
 .visor{display:grid;grid-template-columns:1.05fr .95fr;gap:0;min-height:0;height:100%}
 #visor{min-height:0;height:100%}
 .visor .escena{background:var(--fondo);display:grid;grid-template-rows:minmax(0,1fr) auto;min-height:0;height:100%;padding:20px 6vw 16px}
-.visor .grande{position:relative;min-height:0;height:100%;display:grid;place-items:center}
-.visor .grande img{height:100%;max-height:100%;width:100%;object-fit:contain;border-radius:14px}
+.visor .grande{position:relative;min-height:0}
+.visor .grande img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;border-radius:14px}
 .visor .grande span{position:absolute;bottom:10px;left:0;background:rgba(10,20,15,.78);color:#fff;font-size:12.5px;font-weight:700;padding:6px 10px;border-radius:8px}
 .tiras{display:flex;gap:8px;margin-top:14px;overflow-x:auto;padding-bottom:4px}
 .tiras button{flex:none;width:84px;height:64px;border-radius:10px;overflow:hidden;border:3px solid transparent;padding:0;background:#000;opacity:.7;transition:.15s}
@@ -241,9 +241,12 @@ footer button{background:none;border:0;color:var(--eucalipto);font-weight:700;pa
   .polaroid{position:static;transform:none;margin:20px auto 0}
   .det.imagen-protagonista .cab{grid-template-columns:1fr;padding-top:64px}
   .det.manifiesto .mini{position:static;width:100%;margin:0 0 18px}.det.manifiesto .mini img{aspect-ratio:16/9}
-  .visor .escena{padding:16px}.visor .grande img{max-height:34vh}.visor .ficha{padding:20px 6vw 40px}
+  .visor{height:auto}.visor .escena{padding:16px;height:52vh}.visor .ficha{padding:20px 6vw 40px;overflow:visible}
+  .expandida .contenido:has(.det.proyectos){overflow:auto}
   details.ante .grupo{grid-template-columns:1fr}
   .nav .fila{grid-template-columns:1fr 1fr}.puntos{grid-column:span 2;order:-1}.puntos button{width:26px;height:26px;font-size:10.5px}
   body{padding-bottom:150px}
 }
 @media(max-width:560px){.tarjetas-obj,.autores-grid,.tiempo{grid-template-columns:1fr}.top .pill{display:none}}
+
+@media (prefers-reduced-motion: reduce){.expandida,.expandida .contenido,.b,.ciclo .c i,.ciclo .info{transition:none !important}}
