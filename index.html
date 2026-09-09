@@ -3,17 +3,66 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Casero Style</title>
-<style>
-  body{margin:0;min-height:100vh;display:grid;place-items:center;font-family:system-ui,sans-serif;background:linear-gradient(135deg,#1c1c1e,#3a3a3f);color:#f4f4f4;text-align:center}
-  h1{font-size:2.4rem;letter-spacing:.12em;margin:0 0 .4rem;text-transform:uppercase}
-  p{margin:0;opacity:.75}
-</style>
+<title>Diseño, producción y formación profesional · Pasantía en EcoDeco</title>
+<meta name="description" content="Presentación del trabajo de grado de Diego Esteban Henao Beltrán (Diseño Industrial, Universidad del Valle): análisis de una experiencia de pasantía en EcoDeco Diseño Sostenible, taller de mobiliario en madera recuperada en Cali.">
+<meta property="og:title" content="Diseño, producción y formación profesional">
+<meta property="og:description" content="Análisis de una experiencia de pasantía en EcoDeco Diseño Sostenible. Sustentación en 12 pasos.">
+<meta property="og:image" content="img/comedor.jpg">
+<meta name="theme-color" content="#10231c">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='46' fill='%2310231c'/%3E%3Ccircle cx='50' cy='50' r='30' fill='none' stroke='%23e2a95a' stroke-width='10'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/estilos.css">
 </head>
 <body>
+
+<div class="top"><span>Trabajo de grado · Pasantía académica</span><span class="pill">Univalle · Diseño Industrial · 2026</span></div>
+
+<header>
   <div>
-    <h1>Casero Style</h1>
-    <p>Sitio en construcción</p>
+    <span class="tag">PASANTÍA EN ECODECO DISEÑO SOSTENIBLE · CALI</span>
+    <h1>Diseño, producción y <span>formación profesional</span></h1>
+    <p class="subtitulo">Análisis de una experiencia de pasantía en EcoDeco Diseño Sostenible</p>
+    <p class="sub">Una pasantía en un taller de Cali que fabrica mobiliario a medida con madera recuperada de estibas. Qué aporta un diseñador industrial en una pequeña empresa, y qué revela esa experiencia sobre las condiciones en que se forman los pasantes.</p>
+    <div class="autor"><b>Diego Esteban Henao Beltrán</b>Director: Ángel Miguel Uribe Becerra (Mg.)<br>Programa de Diseño Industrial · Facultad de Artes Integradas · Universidad del Valle</div>
+    <button class="btn" id="comenzar" type="button">Comenzar la presentación →</button>
+    <div class="palabras"><span>Diseño industrial</span><span>Formación profesional</span><span>Mobiliario sostenible</span><span>Procesos productivos</span><span>Pymes</span></div>
   </div>
+  <div>
+    <div class="ciclo" id="ciclo">
+      <svg viewBox="0 0 400 400" aria-hidden="true">
+        <circle cx="200" cy="200" r="150" fill="none" stroke="#e2a95a" stroke-width="18"/>
+        <circle cx="200" cy="200" r="150" fill="none" stroke="#f3c98a" stroke-width="3" stroke-dasharray="3 9" opacity=".7"/>
+        <circle cx="200" cy="200" r="126" fill="none" stroke="#8fbf9f" stroke-width="2" stroke-dasharray="2 10" opacity=".45"/>
+      </svg>
+      <div class="centro"><img src="img/porta-matera.jpg" alt="Porta matera en madera recuperada, EcoDeco"></div>
+    </div>
+    <p class="ciclo-pista">Pasa el cursor (o toca) cada etapa del ciclo para conocerla.</p>
+  </div>
+</header>
+
+<section>
+  <h2>La presentación en 12 pasos</h2>
+  <p class="sub2">Toca una carta para abrirla a pantalla completa, o una foto para ver el proceso de ese proyecto. Puedes seguir la exposición desde tu teléfono con la barra de abajo.</p>
+  <div class="bento" id="bento"></div>
+</section>
+
+<footer>
+  <span>Diseño, producción y formación profesional · Diego Esteban Henao Beltrán · Universidad del Valle · 2026</span>
+  <button id="btn-refs" type="button">Referencias bibliográficas</button>
+</footer>
+
+<nav class="nav" aria-label="Pasos de la presentación">
+  <div class="fila">
+    <button class="flecha" id="ant" type="button">← Anterior</button>
+    <div class="puntos" id="puntos"></div>
+    <button class="flecha" id="sig" type="button">Siguiente →</button>
+  </div>
+  <div class="etiqueta" id="etiqueta"></div>
+</nav>
+
+<script src="js/contenido.js"></script>
+<script src="js/app.js"></script>
 </body>
 </html>
