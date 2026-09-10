@@ -309,3 +309,85 @@ footer button{background:none;border:0;color:var(--eucalipto);font-weight:700;pa
   .expandida,.expandida .contenido,.lienzo,.b,.ciclo .c i,.ciclo .info,.tabs button,.tiras button{transition:none !important}
   .ciclo svg circle{animation:none}
 }
+
+
+/* ============================================================================
+   TELEFONO COMPACTO
+   Va al final para que gane a las reglas de arriba sin tener que tocarlas.
+   ============================================================================ */
+@media(max-width:900px){
+  /* ---- portada: la misma informacion, en menos alto ---- */
+  header{padding:20px 5vw 6px;gap:12px}
+  h1{font-size:clamp(28px,8.4vw,40px);margin:8px 0 6px}
+  .subtitulo{font-size:16px;margin:0 0 8px}
+  .sub{font-size:14.5px;line-height:1.5}
+  .autor{margin-top:12px;font-size:12.5px}.autor b{font-size:15px}
+  .btn{margin-top:14px;padding:12px 20px}
+  .palabras{margin-top:12px;gap:6px}
+  .palabras span{font-size:11px;padding:4px 9px}
+  .top{padding:10px 5vw;font-size:12px}
+  .ciclo{max-width:290px}
+  .ciclo .centro{width:108px;height:108px}
+  .ciclo .c{width:76px;font-size:10.5px}
+  .ciclo .c i{width:46px;height:46px;font-size:19px;margin-bottom:4px}
+  .ciclo-pista{font-size:11.5px}
+
+  /* ---- el mosaico, como en el navegador ----
+     Las fotos vuelven a ser fichas de una columna y dos filas (antes se comian el ancho entero),
+     y el relleno denso tapa los huecos que deja una ficha alta. */
+  section{padding:16px 5vw 10px}
+  h2{font-size:22px}
+  .sub2{font-size:14px;margin:0 0 12px}
+  .bento{grid-auto-rows:112px;gap:8px;grid-auto-flow:row dense}
+  .b{padding:11px;border-radius:14px}
+  .b .ico{font-size:18px;top:9px;left:11px}
+  .b .n{top:9px;right:11px;font-size:10px}
+  .b b{font-size:12.5px;line-height:1.2}
+  .b small{font-size:10.5px;line-height:1.25}
+  .b.foto{grid-column:span 1;grid-row:span 2;min-height:0}
+  .b.foto span{font-size:10.5px;padding:5px 8px}
+}
+
+/* En pantallas de 420 px para arriba entran tres columnas: el mosaico se parece aun mas al del
+   navegador y baja otra fila y media. */
+@media(min-width:420px) and (max-width:900px){
+  .bento{grid-template-columns:repeat(3,minmax(0,1fr));grid-auto-rows:118px}
+  .b b{font-size:12px}
+}
+
+/* En el telefono el globo que cuelga del icono no se dibuja: el texto sale en la ficha
+   compartida de abajo, que no puede salirse de la pantalla. */
+@media(max-width:900px){
+  .ciclo .c .info,.ciclo .c.izq .info{display:none}
+}
+.ficha-ciclo{
+  display:none;position:fixed;left:50%;bottom:calc(var(--nav-h) + 14px);z-index:60;
+  width:min(340px,calc(100vw - 32px));
+  background:#fff;color:var(--carta-tinta);text-align:left;
+  border-radius:14px;padding:14px 16px;
+  box-shadow:0 22px 60px rgba(0,0,0,.55);
+  font-weight:500;font-size:13.5px;line-height:1.5;
+  transform:translate(-50%,10px);opacity:0;pointer-events:none;
+  transition:opacity .2s,transform .25s var(--curva);
+}
+.ficha-ciclo b{display:block;font-size:14.5px;margin-bottom:4px;color:var(--acento-oscuro)}
+@media(max-width:900px){
+  .ficha-ciclo{display:block}
+  .ficha-ciclo.vista{opacity:1;transform:translate(-50%,0);pointer-events:auto}
+}
+@media (prefers-reduced-motion: reduce){ .ficha-ciclo{transition:none} }
+
+/* Tres columnas desde 340 px: probado a 360, 390 y 430 sin que se corte el texto de ninguna carta.
+   Es lo que hace que el mosaico del telefono se parezca al del navegador y baje tres filas. */
+@media(min-width:340px) and (max-width:900px){
+  .bento{grid-template-columns:repeat(3,minmax(0,1fr));grid-auto-rows:124px;gap:7px}
+  .b{padding:10px}
+  .b b{font-size:11.5px}
+  .b small{font-size:10px}
+  .b .ico{font-size:17px;top:8px;left:9px}
+  .b .n{top:8px;right:9px;font-size:9.5px}
+}
+@media(min-width:400px) and (max-width:900px){
+  .bento{grid-auto-rows:118px;gap:8px}
+  .b b{font-size:12px}.b small{font-size:10.5px}
+}

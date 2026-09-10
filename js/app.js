@@ -16,8 +16,20 @@
       <i>${c.ico}</i><span>${c.t}</span>
       <div class="info"><b>${c.t}</b>${c.d}</div>
     </div>`).join(""));
-  ciclo.addEventListener("click", e => { const c = e.target.closest(".c"); if (!c) return; const on = c.classList.contains("activo"); ciclo.querySelectorAll(".c").forEach(x => x.classList.remove("activo")); if (!on) c.classList.add("activo"); });
-  document.addEventListener("click", e => { if (!e.target.closest(".ciclo")) ciclo.querySelectorAll(".c").forEach(x => x.classList.remove("activo")); });
+  // La ficha del telefono: una sola, colgada del body, con el texto de la etapa que este activa.
+  const fichaCiclo = document.createElement("div");
+  fichaCiclo.className = "ficha-ciclo";
+  document.body.appendChild(fichaCiclo);
+  function pintarFichaCiclo() {
+    const c = ciclo.querySelector(".c.activo");
+    if (!c || !movil()) { fichaCiclo.classList.remove("vista"); return; }
+    const d = C[+c.dataset.i];
+    fichaCiclo.innerHTML = "<b>" + d.t + "</b>" + d.d;
+    fichaCiclo.classList.add("vista");
+  }
+  ciclo.addEventListener("click", e => { const c = e.target.closest(".c"); if (!c) return; const on = c.classList.contains("activo"); ciclo.querySelectorAll(".c").forEach(x => x.classList.remove("activo")); if (!on) c.classList.add("activo"); pintarFichaCiclo(); });
+  document.addEventListener("click", e => { if (!e.target.closest(".ciclo") && !e.target.closest(".ficha-ciclo")) { ciclo.querySelectorAll(".c").forEach(x => x.classList.remove("activo")); pintarFichaCiclo(); } });
+  window.addEventListener("resize", pintarFichaCiclo);
 
   // ── Bento ─────────────────────────────────────────────────────
   const bento = $("#bento");
@@ -43,7 +55,11 @@
   }
   function ir(n, abrir) {
     const antes = actual;
-    actual = Math.min(P.length, Math.max(1, n)); pintar();
+    const destino = Math.min(P.length, Math.max(1, n));
+    // Insistir en el primero o en el ultimo no vuelve a dibujar la carta: repetirlo apilaba
+    // transiciones y la dejaba pegada. Salvo que nos pidan abrirla, que ahi si hay que hacerlo.
+    if (destino === antes && abierta && abierta.tipo === "paso" && !abrir) return;
+    actual = destino; pintar();
     if (abrir || abierta) mostrarPaso(actual, null, actual >= antes ? 1 : -1);
   }
 
@@ -64,7 +80,11 @@
     origen.classList.add("hueco");
     abierta = { e, origen, tipo, n };
     if (reducido()) { e.classList.add("abierta"); e.style.transform = ""; }
-    else requestAnimationFrame(() => { e.classList.add("abierta"); e.style.transform = ""; });
+    else {
+      const abrirYa = () => { e.classList.add("abierta"); e.style.transform = ""; };
+      requestAnimationFrame(abrirYa);
+      setTimeout(abrirYa, 60);   // si la pestaña esta en segundo plano el rAF no corre
+    }
     e.querySelector(".cerrar").onclick = () => cerrar();
     e.addEventListener("click", ev => { const a = ev.target.closest("[data-ir]"); if (a) { ev.preventDefault(); ir(+a.dataset.ir, true); } });
     document.body.style.overflow = "hidden";
@@ -83,19 +103,25 @@
   }
   // Cambio de paso con la carta abierta: el contenido nuevo entra deslizándose, sin volver a expandir.
   function transicionar(origenNuevo, html, clase, n, dir) {
-    const { e, origen } = abierta;
-    origen.classList.remove("hueco"); origenNuevo.classList.add("hueco");
+    const { e } = abierta;
+    // Se limpian TODOS: si dos transiciones se cruzan, una carta podia quedarse invisible.
+    bento.querySelectorAll(".hueco").forEach(x => x.classList.remove("hueco"));
+    origenNuevo.classList.add("hueco");
     abierta.origen = origenNuevo; abierta.n = n; abierta.tipo = "paso";
     e.className = "expandida abierta " + (clase || "");
-    const cont = e.querySelector(".contenido"), viejo = cont.querySelector(".lienzo");
+    const cont = e.querySelector(".contenido");
+    // Lo primero: barrer los lienzos que todavia se estuvieran yendo. Si se acumulan, el que se ve
+    // deja de ser el ultimo y la carta parece congelada.
+    cont.querySelectorAll(".lienzo.saliendo").forEach(v => { clearTimeout(v.quitar); v.remove(); });
+    const viejo = cont.querySelector(".lienzo");
     const nuevo = document.createElement("div"); nuevo.className = "lienzo"; nuevo.innerHTML = html;
     cont.scrollTop = 0;
-    if (reducido()) { viejo.remove(); cont.appendChild(nuevo); return; }
-    viejo.classList.add(dir > 0 ? "sale-izq" : "sale-der");
+    if (!viejo || reducido()) { if (viejo) viejo.remove(); cont.appendChild(nuevo); return; }
+    viejo.classList.add("saliendo", dir > 0 ? "sale-izq" : "sale-der");
     nuevo.classList.add(dir > 0 ? "entra-der" : "entra-izq");
     cont.appendChild(nuevo);
     requestAnimationFrame(() => requestAnimationFrame(() => nuevo.classList.remove("entra-der", "entra-izq")));
-    setTimeout(() => viejo.remove(), 380);
+    viejo.quitar = setTimeout(() => viejo.remove(), 380);
   }
   // Deslizar con el dedo para cambiar de paso.
   function activarDeslizar(e) {
@@ -183,5 +209,5 @@
   const q = new URLSearchParams(location.search);
   if (q.get("paso")) setTimeout(() => ir(+q.get("paso"), true), 300);
   if (q.get("proyecto") && PR[q.get("proyecto")]) setTimeout(() => { const b = bento.querySelector(`.b[data-foto="${q.get("proyecto")}"]`); if (b) b.click(); else { actual = 8; pintar(); mostrarPaso(8, q.get("proyecto")); } }, 300);
-  if (q.get("ciclo")) setTimeout(() => ciclo.querySelector(`.c[data-i="${q.get("ciclo")}"]`).classList.add("activo"), 300);
+  if (q.get("ciclo")) setTimeout(() => { const c = ciclo.querySelector(`.c[data-i="${q.get("ciclo")}"]`); if (c) { c.classList.add("activo"); pintarFichaCiclo(); } }, 300);
 })();
