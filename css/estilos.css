@@ -125,12 +125,12 @@ h2{font-size:26px;margin:0 0 6px}.sub2{margin:0 0 18px;color:var(--gris)}
 .det.orbita{grid-template-columns:1fr 1fr}
 .det.orbita .lado{background:var(--fondo);color:var(--tinta);padding:40px 5vw 30px;display:grid;grid-template-rows:auto 1fr;gap:18px;align-content:start;position:relative;overflow:hidden}
 .det.orbita .lado:before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(143,191,159,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(143,191,159,.07) 1px,transparent 1px);background-size:20px 20px}
-.escudo-marco{position:relative;display:flex;align-items:center;gap:22px;padding-left:14px}
+.escudo-marco{position:relative;display:flex;align-items:center;gap:30px;padding:14px 0 6px 22px}
 .escudo-marco span{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--eucalipto);font-weight:800;max-width:180px;line-height:1.5}
-.escudo{width:150px;height:150px;flex:none;position:relative;filter:drop-shadow(0 12px 30px rgba(0,0,0,.45))}
-.escudo:before{content:"";position:absolute;inset:-14px;border-radius:50%;border:1px dashed rgba(226,169,90,.6);animation:gira 60s linear infinite}
-.escudo:after{content:"";position:absolute;inset:-26px;border-radius:50%;border:1px solid rgba(143,191,159,.35)}
-.escudo img,.escudo svg{width:100%;height:100%;object-fit:contain;position:relative;z-index:1}
+.escudo{width:128px;height:178px;flex:none;position:relative;background:#fff;border-radius:16px;padding:12px 10px;box-shadow:0 16px 40px rgba(0,0,0,.45)}
+.escudo:before{content:"";position:absolute;inset:-10px;border-radius:22px;border:1px dashed rgba(226,169,90,.65)}
+.escudo:after{content:"";position:absolute;inset:-20px;border-radius:30px;border:1px solid rgba(143,191,159,.3)}
+.escudo img,.escudo svg{width:100%;height:100%;object-fit:contain;position:relative;z-index:1;display:block}
 .orb-zona{position:relative;display:grid;grid-template-columns:auto minmax(0,1fr);gap:22px;align-items:center}
 .orbita-anillo{position:relative;width:min(260px,100%);aspect-ratio:1/1;flex:none}
 .orbita-anillo svg{width:100%;height:100%}
@@ -324,7 +324,7 @@ footer button{background:none;border:0;color:var(--eucalipto);font-weight:700;pa
   .puntos-lista li{font-size:14.5px;padding:10px 12px;grid-template-columns:34px 1fr}.puntos-lista li i{width:32px;height:32px;font-size:16px}
   .datos div{min-width:calc(50% - 5px)}
   .det.texto-izq,.det.galeria-izq,.det.imagen-alta-izq,.det.numeradas,.visor,.det.orbita,.det.mapa{grid-template-columns:1fr}
-  .det.orbita .lado{order:-1;padding:56px 5vw 26px}.escudo{width:110px;height:110px}.orb-zona{grid-template-columns:1fr;justify-items:center}.orbita-anillo{width:min(260px,80vw)}.orb-item{transform:rotate(var(--a)) translateY(-102px) rotate(calc(-1 * var(--a)))}
+  .det.orbita .lado{order:-1;padding:56px 5vw 26px}.escudo{width:96px;height:134px;padding:8px}.orb-zona{grid-template-columns:1fr;justify-items:center}.orbita-anillo{width:min(260px,80vw)}.orb-item{transform:rotate(var(--a)) translateY(-102px) rotate(calc(-1 * var(--a)))}
   .lado-mapa{order:-1;position:static;height:auto;padding:56px 5vw 20px}.mapa-marco{min-height:260px;aspect-ratio:4/3}.mapa-foto{width:120px;right:4vw;top:66px}
   .det.imagen-alta-izq .img img{transform:none;border:0;box-shadow:none}.det.imagen-alta-izq .txt{padding-left:6vw}.det.numeradas .img img{transform:none;border:0;box-shadow:none}
   .datos{display:grid;grid-template-columns:1fr;border-bottom:0}.datos div{display:flex;align-items:baseline;gap:10px;padding:10px 0;margin-right:0;border-right:0;border-bottom:1px solid #dfe7e2}.datos b{font-size:17px}.datos span{margin-top:0}
@@ -362,7 +362,7 @@ footer button{background:none;border:0;color:var(--eucalipto);font-weight:700;pa
 @media(max-width:560px){.tarjetas-obj,.autores-grid,.tiempo{grid-template-columns:1fr}.top .pill{display:none}.mapa-lineas{grid-template-columns:repeat(2,1fr)}}
 @media (prefers-reduced-motion: reduce){
   .expandida,.expandida .contenido,.lienzo,.b,.ciclo .c i,.ciclo .info,.tabs button,.tiras button{transition:none !important}
-  .ciclo svg circle,.orb-rotor,.orb-item i,.escudo:before,.orbita-anillo svg circle{animation:none}
+  .ciclo svg circle,.orb-rotor,.orb-item i,.orbita-anillo svg circle{animation:none}
 }
 
 
