@@ -138,21 +138,35 @@
   const cab = p => `<div class="k"><span class="ico-paso">${p.ico}</span> Paso ${p.n} de ${P.length} · ${p.s}</div><h3>${p.t}</h3>`;
   const datos = p => p.datos ? `<div class="datos">${p.datos.map(([v, t]) => `<div><b>${v}</b><span>${t}</span></div>`).join("")}</div>` : "";
   const img = p => `<div class="img"><img src="${I + p.img}" alt="${p.pie}"><span class="pie-img">${p.pie}</span></div>`;
-  const rel = p => p.rel ? `<div class="relacionado"><span>Relacionado</span>${p.rel.map(n => `<a href="#" data-ir="${n}">${P[n - 1].ico} ${n}. ${P[n - 1].t}</a>`).join("")}</div>` : "";
+  const sabias = p => p.sabias ? `<aside class="sabias"><i>🌱</i><div><b>¿Sabías que…?</b><p>${p.sabias}</p></div></aside>` : "";
+  const escudo = `<div class="escudo"><img src="${I}escudo-univalle.png" alt="Escudo de la Universidad del Valle" onerror="this.replaceWith(document.getElementById('escudo-svg').content.cloneNode(true))"></div>`;
+  const ORB_ICOS = ["🎓", "🪚", "♻️", "👁️"];
 
   const LAYOUT = {
-    "texto-izq": p => `<div class="det texto-izq"><div class="txt">${cab(p)}<p class="lead">${p.lead}</p>${datos(p)}${lista(p.b, ["🎓", "🪚", "♻️", "👁️"])}${rel(p)}</div>${img(p)}</div>`,
-    "galeria-izq": p => `<div class="det galeria-izq"><div class="galeria">${p.galeria.map(([f, c]) => `<figure><img src="${I + f}" alt="${c}"><figcaption>${c}</figcaption></figure>`).join("")}</div><div class="txt">${cab(p)}<p class="lead">${p.lead}</p>${datos(p)}${lista(p.b, ["🧰", "🗂️", "✨", "🌱"])}${rel(p)}</div></div>`,
-    "banner": p => `<div class="det banner">${img(p)}<div class="txt"><div>${cab(p)}</div><div><p class="lead">${p.lead}</p>${lista(p.b, ["⏱️", "🔁", "📏"])}</div><div><div class="cita"><b>PREGUNTA PROBLEMA</b>${p.cita}</div>${rel(p)}</div></div></div>`,
-    "tarjetas": p => `<div class="det tarjetas"><div class="txt">${cab(p)}<p class="lead">${p.lead}</p><div class="tarjetas-obj">${p.tarjetas.map(([v, t], i) => `<div><em>OBJETIVO ESPECÍFICO ${i + 1}</em><div><b>${v}</b><span>${t}</span></div></div>`).join("")}</div><p class="nota">${p.nota}</p>${rel(p)}</div></div>`,
-    "linea-tiempo": p => `<div class="det linea-tiempo"><div class="txt">${cab(p)}<p class="lead">${p.lead}</p><div class="tiempo">${p.fases.map(([t, d], i) => `<div><i>${i + 1}</i><b>${t}</b><span>${d}</span></div>`).join("")}</div><div class="tiempo-fechas"><div><b>INICIO PREVISTO</b>21 de diciembre de 2025</div><div><b>CIERRE PREVISTO</b>21 de abril de 2026</div><div><b>CIERRE REAL</b>20 de febrero de 2026</div><div class="polaroid"><img src="${I + p.img}" alt="${p.pie}"><small>${p.pie}</small></div></div>${rel(p)}</div></div>`,
-    "imagen-protagonista": p => `<div class="det imagen-protagonista"><div class="cab"><div>${cab(p)}</div><p class="lead">${p.lead}</p></div><div class="img"><img src="${I + p.img}" alt="${p.pie}"></div><div class="chips">${p.chips.map((c, i) => `<span><i>${i + 1}</i> ${c}</span>`).join("")}</div><div class="pie-flujo"><p class="nota-suelta">${p.nota}</p>${rel(p)}</div></div>`,
-    "autores": p => `<div class="det autores"><div class="txt">${cab(p)}<p class="lead">${p.lead}</p><div class="autores-grid">${p.autores.map(([a, y, tema, d]) => `<div><b>${a}</b><em>${y}</em><small>${tema}</small><p>${d}</p></div>`).join("")}</div><details class="ante"><summary>Antecedentes revisados (estado del arte y de la técnica)</summary>${p.antecedentes.map(([g, r]) => `<div class="grupo"><b>${g}</b><span>${r}</span></div>`).join("")}</details>${rel(p)}</div></div>`,
+    "orbita": p => `<div class="det orbita"><div class="txt">${cab(p)}<p class="lead">${p.lead}</p>${datos(p)}${sabias(p)}</div>
+      <div class="lado"><div class="escudo-marco">${escudo}<span>Universidad del Valle · Diseño Industrial</span></div>
+        <div class="orb-zona"><div class="orbita-anillo"><svg viewBox="0 0 300 300" aria-hidden="true"><circle cx="150" cy="150" r="118" fill="none" stroke="#e2a95a" stroke-width="1.5" opacity=".7"/><circle cx="150" cy="150" r="128" fill="none" stroke="#8fbf9f" stroke-width="1" stroke-dasharray="2 10" opacity=".5"/><circle cx="150" cy="150" r="106" fill="none" stroke="#e2a95a" stroke-width="1" stroke-dasharray="30 14" opacity=".35"/></svg>
+          <div class="orb-rotor">${p.b.map((t, i) => `<button type="button" class="orb-item ${i === 0 ? "on" : ""}" data-i="${i}" style="--a:${i * 90}deg" aria-label="Motivo ${i + 1}"><i>${ORB_ICOS[i]}</i></button>`).join("")}</div>
+          <div class="orb-centro"><b>4</b><small>motivos</small></div></div>
+          <div class="orb-panel"><div class="k">Motivo <span class="orb-n">1</span> de 4</div><p class="orb-texto">${p.b[0]}</p><small>Toca un ícono para leer cada motivo · la órbita se detiene mientras lees</small></div></div>
+      </div></div>`,
+    "mapa": p => `<div class="det mapa"><div class="txt">${cab(p)}<p class="lead">${p.lead}</p>${datos(p)}${lista(p.b, ["🧰", "🗂️", "✨", "🌱"])}${sabias(p)}</div>
+      <div class="lado-mapa"><div class="mapa-marco"><iframe src="${p.mapa}" title="Ubicación de EcoDeco Diseño Sostenible en Cali" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe><span class="mapa-pin">📍 Cali, Valle del Cauca</span></div>
+        <figure class="mapa-foto"><img src="${I}comedor.jpg" alt="Comedor fabricado por EcoDeco"><figcaption>Taller · producción</figcaption></figure>
+        <div class="mapa-lineas">${p.galeria.map(([f, c]) => `<figure><img src="${I + f}" alt="${c}"><figcaption>${c}</figcaption></figure>`).join("")}</div>
+      </div></div>`,
+    "texto-izq": p => `<div class="det texto-izq"><div class="txt">${cab(p)}<p class="lead">${p.lead}</p>${datos(p)}${lista(p.b, ["🎓", "🪚", "♻️", "👁️"])}${sabias(p)}</div>${img(p)}</div>`,
+    "galeria-izq": p => `<div class="det galeria-izq"><div class="galeria">${p.galeria.map(([f, c]) => `<figure><img src="${I + f}" alt="${c}"><figcaption>${c}</figcaption></figure>`).join("")}</div><div class="txt">${cab(p)}<p class="lead">${p.lead}</p>${datos(p)}${lista(p.b, ["🧰", "🗂️", "✨", "🌱"])}${sabias(p)}</div></div>`,
+    "banner": p => `<div class="det banner">${img(p)}<div class="txt"><div>${cab(p)}</div><div><p class="lead">${p.lead}</p>${lista(p.b, ["⏱️", "🔁", "📏"])}</div><div><div class="cita"><b>PREGUNTA PROBLEMA</b>${p.cita}</div>${sabias(p)}</div></div></div>`,
+    "tarjetas": p => `<div class="det tarjetas"><div class="txt">${cab(p)}<p class="lead">${p.lead}</p><div class="tarjetas-obj">${p.tarjetas.map(([v, t], i) => `<div><em>OBJETIVO ESPECÍFICO ${i + 1}</em><div><b>${v}</b><span>${t}</span></div></div>`).join("")}</div><p class="nota">${p.nota}</p>${sabias(p)}</div></div>`,
+    "linea-tiempo": p => `<div class="det linea-tiempo"><div class="txt">${cab(p)}<p class="lead">${p.lead}</p><div class="tiempo">${p.fases.map(([t, d], i) => `<div><i>${i + 1}</i><b>${t}</b><span>${d}</span></div>`).join("")}</div><div class="tiempo-fechas"><div><b>INICIO PREVISTO</b>21 de diciembre de 2025</div><div><b>CIERRE PREVISTO</b>21 de abril de 2026</div><div><b>CIERRE REAL</b>20 de febrero de 2026</div><div class="polaroid"><img src="${I + p.img}" alt="${p.pie}"><small>${p.pie}</small></div></div>${sabias(p)}</div></div>`,
+    "imagen-protagonista": p => `<div class="det imagen-protagonista"><div class="cab"><div>${cab(p)}</div><p class="lead">${p.lead}</p></div><div class="img"><img src="${I + p.img}" alt="${p.pie}"></div><div class="chips">${p.chips.map((c, i) => `<span><i>${i + 1}</i> ${c}</span>`).join("")}</div><div class="pie-flujo"><p class="nota-suelta">${p.nota}</p>${sabias(p)}</div></div>`,
+    "autores": p => `<div class="det autores"><div class="txt">${cab(p)}<p class="lead">${p.lead}</p><div class="autores-grid">${p.autores.map(([a, y, tema, d]) => `<div><b>${a}</b><em>${y}</em><small>${tema}</small><p>${d}</p></div>`).join("")}</div><details class="ante"><summary>Antecedentes revisados (estado del arte y de la técnica)</summary>${p.antecedentes.map(([g, r]) => `<div class="grupo"><b>${g}</b><span>${r}</span></div>`).join("")}</details>${sabias(p)}</div></div>`,
     "proyectos": (p, sel) => `<div class="det proyectos"><div class="cab">${cab(p)}<p class="lead">${p.lead}</p><div class="tabs" id="tabs">${Object.entries(PR).map(([id, f]) => `<button type="button" data-p="${id}" class="${id === sel ? "on" : ""}">${f.t}</button>`).join("")}</div></div><div id="visor"></div></div>`,
-    "imagen-alta-izq": p => `<div class="det imagen-alta-izq">${img(p)}<div class="txt">${cab(p)}<p class="lead">${p.lead}</p>${datos(p)}${lista(p.b, ["🧊", "📐", "🪵", "🧠"])}${rel(p)}</div></div>`,
-    "manifiesto": p => `<div class="det manifiesto"><div class="mini"><img src="${I + p.img}" alt="${p.pie}"></div><div class="txt">${cab(p)}<p class="frase">${p.frase}</p><p class="lead">${p.lead}</p>${lista(p.b, ["🧑‍🔧", "📜", "🌐", "🔍"])}${rel(p)}</div></div>`,
-    "numeradas": p => `<div class="det numeradas"><div class="txt">${cab(p)}<p class="lead">${p.lead}</p><ol class="numeradas-lista">${p.b.map(([t, d]) => `<li><b>${t}</b><span>${d}</span></li>`).join("")}</ol>${rel(p)}</div>${img(p)}</div>`,
-    "cierre": p => `<div class="det cierre"><div class="fondo"></div><div class="txt">${cab(p)}<p class="lead">${p.lead}</p>${lista(p.b, ["🤝", "📐", "⚖️", "🎓"])}${rel(p)}<div class="gracias"><b>${p.gracias}</b><small><strong>${S.autor}</strong><br>${S.titulo}<br>${S.programa}<br>${S.universidad}</small></div></div></div>`
+    "imagen-alta-izq": p => `<div class="det imagen-alta-izq">${img(p)}<div class="txt">${cab(p)}<p class="lead">${p.lead}</p>${datos(p)}${lista(p.b, ["🧊", "📐", "🪵", "🧠"])}${sabias(p)}</div></div>`,
+    "manifiesto": p => `<div class="det manifiesto"><div class="mini"><img src="${I + p.img}" alt="${p.pie}"></div><div class="txt">${cab(p)}<p class="frase">${p.frase}</p><p class="lead">${p.lead}</p>${lista(p.b, ["🧑‍🔧", "📜", "🌐", "🔍"])}${sabias(p)}</div></div>`,
+    "numeradas": p => `<div class="det numeradas"><div class="txt">${cab(p)}<p class="lead">${p.lead}</p><ol class="numeradas-lista">${p.b.map(([t, d]) => `<li><b>${t}</b><span>${d}</span></li>`).join("")}</ol>${sabias(p)}</div>${img(p)}</div>`,
+    "cierre": p => `<div class="det cierre"><div class="fondo"></div><div class="txt">${cab(p)}<p class="lead">${p.lead}</p>${lista(p.b, ["🤝", "📐", "⚖️", "🎓"])}${sabias(p)}<div class="gracias"><b>${p.gracias}</b><small><strong>${S.autor}</strong><br>${S.titulo}<br>${S.programa}<br>${S.universidad}</small></div></div></div>`
   };
 
   function mostrarPaso(n, proyecto, dir = 1) {
@@ -163,6 +177,22 @@
     if (abierta && abierta.tipo === "paso") { transicionar(origen, html, clase, n, dir); e = abierta.e; }
     else e = expandir(origen, html, clase, "paso", n);
     if (p.layout === "proyectos") activarProyectos(e, sel);
+    if (p.layout === "orbita") activarOrbita(e, p);
+  }
+  function activarOrbita(e, p) {
+    const zona = [...e.querySelectorAll(".orb-zona")].pop(); if (!zona) return;
+    const rotor = zona.querySelector(".orb-rotor"), panel = zona.querySelector(".orb-panel");
+    let reanudar = null;
+    rotor.addEventListener("click", ev => {
+      const b = ev.target.closest(".orb-item"); if (!b) return;
+      const i = +b.dataset.i;
+      rotor.querySelectorAll(".orb-item").forEach(x => x.classList.toggle("on", x === b));
+      panel.querySelector(".orb-n").textContent = i + 1;
+      const t = panel.querySelector(".orb-texto"); t.classList.add("cambia"); setTimeout(() => { t.textContent = p.b[i]; t.classList.remove("cambia"); }, 160);
+      rotor.classList.add("pausa"); clearTimeout(reanudar); reanudar = setTimeout(() => rotor.classList.remove("pausa"), 6000);
+    });
+    rotor.addEventListener("mouseenter", () => rotor.classList.add("pausa"));
+    rotor.addEventListener("mouseleave", () => { clearTimeout(reanudar); rotor.classList.remove("pausa"); });
   }
   function activarProyectos(e, sel) {
     pintarProyecto(sel);
@@ -180,7 +210,7 @@
     let k = f.imgs.length - 1;
     const pinta = () => {
       v.innerHTML = `<div class="visor"><div class="escena"><div class="grande"><img src="${I + f.imgs[k][0]}" alt="${f.imgs[k][1]}"><span>${k + 1} / ${f.imgs.length} · ${f.imgs[k][1]}</span></div><div class="tiras">${f.imgs.map(([s, c], i) => `<button type="button" data-k="${i}" class="${i === k ? "on" : ""}" title="${c}"><img src="${I + s}" alt=""></button>`).join("")}</div></div>
-        <div class="ficha"><span class="k">${f.linea}</span><h4>${f.t}</h4><p>${f.d}</p><span class="k">Resultado</span><p>${f.r}</p><span class="k">Participación del diseñador</span><p>${f.rol}</p><div class="proceso">${["Referencia", "Boceto", "Modelado 3D", "Plano técnico", "Producto final"].map((s, i) => `<span><i>${i + 1}</i> ${s}</span>`).join("")}</div>${rel(P[7])}</div></div>`;
+        <div class="ficha"><span class="k">${f.linea}</span><h4>${f.t}</h4><p>${f.d}</p><span class="k">Resultado</span><p>${f.r}</p><span class="k">Participación del diseñador</span><p>${f.rol}</p><div class="proceso">${["Referencia", "Boceto", "Modelado 3D", "Plano técnico", "Producto final"].map((s, i) => `<span><i>${i + 1}</i> ${s}</span>`).join("")}</div>${sabias(P[7])}</div></div>`;
       v.querySelector(".tiras").addEventListener("click", ev => { const b = ev.target.closest("button"); if (b) { k = +b.dataset.k; pinta(); } });
     };
     pinta();
