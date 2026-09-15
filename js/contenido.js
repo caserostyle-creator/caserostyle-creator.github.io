@@ -57,10 +57,10 @@ window.PASOS = [
     lead: "Taller de diseño y fabricación de mobiliario ubicado en Cali. Produce piezas funcionales y decorativas a medida, elaboradas principalmente con madera de pino recuperada de estibas.",
     b: ["Servicios: diseño personalizado, planos técnicos, modelado 3D, fabricación en madera recuperada e instalación cuando se requiere.", "Cuatro líneas de producto: hogar y organización · comercial (B2B) · accesorios y objetos · mascotas.", "Cada pieza es única por las condiciones del material recuperado y el proceso manual de fabricación.", "Promueve una cultura de consumo responsable y la reutilización de recursos."] },
 
-  { n: 3, ico: "❓", sabias: "Según la FAO, el planeta pierde alrededor de 10 millones de hectáreas de bosque cada año. Reutilizar madera reduce la presión sobre los bosques.", t: "Problemática", s: "Formación y operación", layout: "banner", img: "mesa-noche.jpg", pie: "Mesa de noche · línea hogar · @ecodeco_co",
+  { n: 3, ico: "❓", sabias: "Según la FAO, el planeta pierde alrededor de 10 millones de hectáreas de bosque cada año. Reutilizar madera reduce la presión sobre los bosques.", t: "Problemática", s: "Formación y operación", layout: "banner", img: "amb-madera.jpg", pie: "Madera de estibas recuperada · la materia prima de EcoDeco",
     lead: "En una pequeña empresa, diseño y producción están estrechamente integrados. El diseñador en formación entra directo al flujo productivo y combina tareas técnicas con el desarrollo de producto.",
     b: ["El aprendizaje ocurre al mismo tiempo que la ejecución de actividades operativas.", "El pasante traduce referencias visuales del cliente en soluciones técnicas viables para el taller.", "Se hace necesario reconocer el trabajo del estudiante y delimitar con claridad sus funciones."],
-    cita: "¿De qué manera las dinámicas productivas en una pequeña empresa manufacturera influyen en la delimitación del rol del diseñador industrial en formación durante el desarrollo de una pasantía, en relación con el equilibrio entre formación académica y participación operativa en el proceso de producción?" },
+    cita: "¿De qué manera la dinámica operativa de una pequeña empresa manufacturera reconfigura el alcance del diseñador industrial en formación, al balancear los objetivos pedagógicos de la pasantía con las necesidades inmediatas de producción?" },
 
   { n: 4, ico: "🧭", sabias: "En la economía circular los materiales dan vueltas: reparar, reutilizar y rediseñar van antes que desechar.", t: "Objetivos", s: "General y específicos", layout: "tarjetas",
     lead: "Objetivo general: analizar el rol del diseñador industrial en formación dentro de EcoDeco Diseño Sostenible, a partir de la experiencia de pasantía y su participación en actividades de diseño, representación técnica y procesos de producción.",
@@ -104,10 +104,14 @@ window.PASOS = [
     lead: "Oportunidades de mejora identificadas durante la pasantía, tanto para la gestión de los proyectos como para la participación del diseñador en la empresa.",
     b: [["Fortalecer la documentación técnica", "Consolidar el uso de modelos 3D y planos estandarizados como medio de comunicación entre diseño y producción."], ["Implementar el seguimiento de proyectos", "Registrar el estado de cada proyecto, los cambios solicitados por los clientes y las modificaciones hechas en fabricación."], ["Delimitar las funciones del pasante", "Definir alcances y responsabilidades acordes con los objetivos formativos, para equilibrar aprendizaje y operación."], ["Abrir espacios de retroalimentación", "Programar seguimientos periódicos entre la empresa y el pasante para evaluar avances y resolver dificultades."]] },
 
-  { n: 12, ico: "✅", sabias: "Comprar menos y mejor, reparar y elegir materiales recuperados son gestos cotidianos que reducen la huella ambiental del hogar.", t: "Conclusiones", s: "Cierre", layout: "cierre", img: "tipi-final.jpg", pie: "Tipi para gato · producto final · Autor",
+  { n: 12, ico: "✅", sabias: "Comprar menos y mejor, reparar y elegir materiales recuperados son gestos cotidianos que reducen la huella ambiental del hogar.", t: "Conclusiones", s: "Cierre", layout: "constelacion", img: "tipi-final.jpg", pie: "Tipi para gato · producto final · Autor",
     lead: "El diseñador industrial cumple un papel fundamental en los procesos productivos de las pequeñas empresas manufactureras. Reconocer ese aporte es también reconocer al diseñador en formación.",
     b: ["El diseño facilita la comunicación entre las necesidades del cliente y las posibilidades de fabricación.", "La documentación técnica, el modelado 3D y el conocimiento de los procesos contribuyen a la eficiencia y la calidad.", "Existe una tensión real entre el carácter formativo de la pasantía y las necesidades operativas de la empresa.", "Hay que fortalecer la relación entre la academia y el sector productivo sin perder de vista los objetivos formativos."],
-    gracias: "Gracias" }
+    conclusiones: [["🤝", "Puente", "El diseño facilita la comunicación entre las necesidades del cliente y las posibilidades de fabricación."], ["📐", "Herramientas", "La documentación técnica, el modelado 3D y el conocimiento de los procesos contribuyen a la eficiencia y la calidad."], ["⚖️", "Tensión", "Existe una tensión real entre el carácter formativo de la pasantía y las necesidades operativas de la empresa."], ["🎓", "Academia y empresa", "Hay que fortalecer la relación entre la academia y el sector productivo sin perder de vista los objetivos formativos."]] },
+
+  { n: 13, ico: "🙏", t: "Gracias", s: "Cierre de la sustentación", layout: "gracias",
+    lead: "Por su tiempo, su atención y sus preguntas.",
+    fotos: [["closet-final.jpg", "Clóset industrial"], ["cava-final.jpg", "Cava para restaurante"], ["biblio-final.jpg", "Biblioteca empotrada"], ["tipi-final.jpg", "Tipi para gato"]] }
 ];
 
 window.REFERENCIAS = [
