@@ -33,8 +33,8 @@
 
   // ── Bento ─────────────────────────────────────────────────────
   const bento = $("#bento");
-  const orden = ["F:closet", 1, 2, 3, 4, 5, 6, "F:cava", 7, 8, 9, "F:tipi", 10, 11, 12];
-  const calidos = [3, 8, 10];
+  const orden = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+  const calidos = [3, 8];
   bento.innerHTML = orden.map(o => {
     if (typeof o === "string") { const id = o.slice(2), f = PR[id]; return `<button class="b foto" data-foto="${id}" type="button" aria-label="Ver el proyecto ${f.t}"><img src="${I + f.imgs[f.imgs.length - 1][0]}" alt="" loading="lazy"><span>${f.t}</span></button>`; }
     const p = P[o - 1];
@@ -134,8 +134,28 @@
   }
 
   // ── Composiciones de cada paso ────────────────────────────────
-  const lista = (arr, icos) => `<ul class="puntos-lista">${arr.map((x, i) => `<li><i>${icos && icos[i] ? icos[i] : i + 1}</i><span>${x}</span></li>`).join("")}</ul>`;
-  const cab = p => `<div class="k"><span class="ico-paso">${p.ico}</span> Paso ${p.n} de ${P.length} · ${p.s}</div><h3>${p.t}</h3>`;
+  const lista = (arr, icos, modo) => modo === "simple"
+    ? `<ul class="lista-simple">${arr.map(x => `<li><i></i><span>${x}</span></li>`).join("")}</ul>`
+    : modo === "grid"
+    ? `<ul class="lista-grid">${arr.map((x, i) => `<li><i>${icos[i]}</i><span>${x}</span></li>`).join("")}</ul>`
+    : `<ul class="puntos-lista ${modo === "escalonado" ? "escalonado" : ""}">${arr.map((x, i) => `<li><i>${icos && icos[i] ? icos[i] : i + 1}</i><span>${x}</span></li>`).join("")}</ul>`;
+  const cab = p => `<div class="k"><span class="ico-paso">${p.ico}</span> Paso ${p.n} de ${P.length} · ${p.s}</div><h3>${p.tHtml || p.t}</h3>`;
+  const deco = (f, clase, pie) => `<figure class="deco ${clase}"><img src="${I + f}" alt="" loading="lazy"><figcaption>${pie}</figcaption></figure>`;
+  const caja = ([t, d]) => `<div class="caja"><b>${t}</b><span>${d}</span></div>`;
+  const flecha = `<i class="fl" aria-hidden="true"></i>`;
+  const diagrama = f => `<div class="diagrama">
+      <section class="etapa"><h4><i>${f.etapa1.ico}</i>${f.etapa1.t}</h4><div class="cajas">${f.etapa1.cajas.map(caja).join(flecha)}${flecha}<div class="caja decision">${f.etapa1.decision}</div></div></section>
+      <div class="bifurca"><span>Catálogo</span><span>Personalizable</span></div>
+      <div class="rutas">
+        <section class="ruta catalogo"><h5>${f.catalogo.t}</h5><p>${f.catalogo.d}</p><div class="cajas col">${f.catalogo.cajas.map(caja).join(flecha)}</div></section>
+        <section class="ruta personal"><h5>${f.personal.t}</h5><p>${f.personal.d}</p><div class="cajas col">${f.personal.cajas.map(caja).join(flecha)}</div></section>
+      </div>
+      <div class="une"></div>
+      <section class="etapa"><h4><i>${f.etapa2.ico}</i>${f.etapa2.t}</h4><div class="cajas">${f.etapa2.cajas.map(caja).join(flecha)}</div></section>
+      <div class="baja"></div>
+      <section class="etapa"><h4><i>${f.etapa3.ico}</i>${f.etapa3.t}</h4><div class="cajas">${f.etapa3.cajas.map(caja).join(flecha)}</div></section>
+      <div class="leyenda">${f.leyenda.map(([i, t, d]) => `<div><i>${i}</i><div><b>${t}</b><span>${d}</span></div></div>`).join("")}</div>
+    </div>`;
   const datos = p => p.datos ? `<div class="datos">${p.datos.map(([v, t]) => `<div><b>${v}</b><span>${t}</span></div>`).join("")}</div>` : "";
   const img = p => `<div class="img"><img src="${I + p.img}" alt="${p.pie}"><span class="pie-img">${p.pie}</span></div>`;
   const sabias = p => p.sabias ? `<aside class="sabias"><i>🌱</i><div><b>¿Sabías que…?</b><p>${p.sabias}</p></div></aside>` : "";
@@ -143,28 +163,28 @@
   const ORB_ICOS = ["🎓", "🪚", "♻️", "👁️"];
 
   const LAYOUT = {
-    "orbita": p => `<div class="det orbita"><div class="txt">${cab(p)}<p class="lead">${p.lead}</p>${datos(p)}${sabias(p)}</div>
+    "orbita": p => `<div class="det orbita"><div class="txt">${cab(p)}<p class="lead">${p.lead}</p><blockquote class="frase-autor">${p.frase}</blockquote>${datos(p)}${sabias(p)}</div>
       <div class="lado"><div class="escudo-marco">${escudo}<span>Universidad del Valle · Diseño Industrial</span></div>
         <div class="orb-zona"><div class="orbita-anillo"><svg viewBox="0 0 300 300" aria-hidden="true"><circle cx="150" cy="150" r="118" fill="none" stroke="#e2a95a" stroke-width="1.5" opacity=".7"/><circle cx="150" cy="150" r="128" fill="none" stroke="#8fbf9f" stroke-width="1" stroke-dasharray="2 10" opacity=".5"/><circle cx="150" cy="150" r="106" fill="none" stroke="#e2a95a" stroke-width="1" stroke-dasharray="30 14" opacity=".35"/></svg>
           <div class="orb-rotor">${p.b.map((t, i) => `<button type="button" class="orb-item ${i === 0 ? "on" : ""}" data-i="${i}" style="--a:${i * 90}deg" aria-label="Motivo ${i + 1}"><i>${ORB_ICOS[i]}</i></button>`).join("")}</div>
           <div class="orb-centro"><b>4</b><small>motivos</small></div></div>
           <div class="orb-panel"><div class="k">Motivo <span class="orb-n">1</span> de 4</div><p class="orb-texto">${p.b[0]}</p><small>Toca un ícono para leer cada motivo · la órbita se detiene mientras lees</small></div></div>
       </div></div>`,
-    "mapa": p => `<div class="det mapa"><div class="txt">${cab(p)}<p class="lead">${p.lead}</p>${datos(p)}${lista(p.b, ["🧰", "🗂️", "✨", "🌱"])}${sabias(p)}</div>
+    "mapa": p => `<div class="det mapa"><div class="txt">${cab(p)}<p class="lead">${p.lead}</p>${datos(p)}${lista(p.b, null, "simple")}${sabias(p)}</div>
       <div class="lado-mapa"><div class="mapa-marco"><iframe src="${p.mapa}" title="Ubicación de EcoDeco Diseño Sostenible en Cali" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe><span class="mapa-pin">📍 Cali, Valle del Cauca</span></div>
         <figure class="mapa-foto"><img src="${I}comedor.jpg" alt="Comedor fabricado por EcoDeco"><figcaption>Taller · producción</figcaption></figure>
         <div class="mapa-lineas">${p.galeria.map(([f, c]) => `<figure><img src="${I + f}" alt="${c}"><figcaption>${c}</figcaption></figure>`).join("")}</div>
       </div></div>`,
     "texto-izq": p => `<div class="det texto-izq"><div class="txt">${cab(p)}<p class="lead">${p.lead}</p>${datos(p)}${lista(p.b, ["🎓", "🪚", "♻️", "👁️"])}${sabias(p)}</div>${img(p)}</div>`,
     "galeria-izq": p => `<div class="det galeria-izq"><div class="galeria">${p.galeria.map(([f, c]) => `<figure><img src="${I + f}" alt="${c}"><figcaption>${c}</figcaption></figure>`).join("")}</div><div class="txt">${cab(p)}<p class="lead">${p.lead}</p>${datos(p)}${lista(p.b, ["🧰", "🗂️", "✨", "🌱"])}${sabias(p)}</div></div>`,
-    "banner": p => `<div class="det banner">${img(p)}<div class="txt"><div>${cab(p)}</div><div><p class="lead">${p.lead}</p>${lista(p.b, ["⏱️", "🔁", "📏"])}</div><div><div class="cita"><b>PREGUNTA PROBLEMA</b>${p.cita}</div>${sabias(p)}</div></div></div>`,
-    "tarjetas": p => `<div class="det tarjetas"><div class="txt">${cab(p)}<p class="lead">${p.lead}</p><div class="tarjetas-obj">${p.tarjetas.map(([v, t], i) => `<div><em>OBJETIVO ESPECÍFICO ${i + 1}</em><div><b>${v}</b><span>${t}</span></div></div>`).join("")}</div><p class="nota">${p.nota}</p>${sabias(p)}</div></div>`,
-    "linea-tiempo": p => `<div class="det linea-tiempo"><div class="txt">${cab(p)}<p class="lead">${p.lead}</p><div class="tiempo">${p.fases.map(([t, d], i) => `<div><i>${i + 1}</i><b>${t}</b><span>${d}</span></div>`).join("")}</div><div class="tiempo-fechas"><div><b>INICIO PREVISTO</b>21 de diciembre de 2025</div><div><b>CIERRE PREVISTO</b>21 de abril de 2026</div><div><b>CIERRE REAL</b>20 de febrero de 2026</div><div class="polaroid"><img src="${I + p.img}" alt="${p.pie}"><small>${p.pie}</small></div></div>${sabias(p)}</div></div>`,
-    "imagen-protagonista": p => `<div class="det imagen-protagonista"><div class="cab"><div>${cab(p)}</div><p class="lead">${p.lead}</p></div><div class="img"><img src="${I + p.img}" alt="${p.pie}"></div><div class="chips">${p.chips.map((c, i) => `<span><i>${i + 1}</i> ${c}</span>`).join("")}</div><div class="pie-flujo"><p class="nota-suelta">${p.nota}</p>${sabias(p)}</div></div>`,
-    "autores": p => `<div class="det autores"><div class="txt">${cab(p)}<p class="lead">${p.lead}</p><div class="autores-grid">${p.autores.map(([a, y, tema, d]) => `<div><b>${a}</b><em>${y}</em><small>${tema}</small><p>${d}</p></div>`).join("")}</div><details class="ante"><summary>Antecedentes revisados (estado del arte y de la técnica)</summary>${p.antecedentes.map(([g, r]) => `<div class="grupo"><b>${g}</b><span>${r}</span></div>`).join("")}</details>${sabias(p)}</div></div>`,
+    "banner": p => `<div class="det banner">${img(p)}<div class="txt"><div class="col-a">${cab(p)}<p class="lead">${p.lead}</p>${lista(p.b, ["⏱️", "🔁", "📏"])}</div><div class="col-b"><div class="panel-claro"><div class="cita"><b>PREGUNTA PROBLEMA</b>${p.cita}</div>${sabias(p)}</div></div></div></div>`,
+    "tarjetas": p => `<div class="det tarjetas">${deco("amb-bosque.jpg", "d1", "Bosque de pino")}${deco("amb-hojas.jpg", "d2", "Madera y hojas")}${deco("amb-estibas.jpg", "d3", "Estibas recuperadas")}${deco("amb-taller.jpg", "d4", "Trabajo en el taller")}<div class="txt">${cab(p)}<p class="lead">${p.lead}</p><div class="tarjetas-obj">${p.tarjetas.map(([v, t], i) => `<div><em>OBJETIVO ESPECÍFICO ${i + 1}</em><div><b>${v}</b><span>${t}</span></div></div>`).join("")}</div><p class="nota">${p.nota}</p>${sabias(p)}</div></div>`,
+    "linea-tiempo": p => `<div class="det linea-tiempo"><div class="txt">${cab(p)}<p class="lead">${p.lead}</p><div class="tiempo">${p.fases.map(([t, d], i) => `<div><i>${i + 1}</i><b>${t}</b><span>${d}</span></div>`).join("")}</div><div class="galeria-tiempo"><figure><img src="${I}amb-estibas.jpg" alt=""><figcaption>Adaptación · conocer el material y el taller</figcaption></figure><figure><img src="${I}amb-taller.jpg" alt=""><figcaption>Aprendizaje y práctica · manos en la madera</figcaption></figure><figure><img src="${I}amb-bosque.jpg" alt=""><figcaption>Evaluación · el ciclo completo, del bosque al mueble</figcaption></figure></div>${sabias(p)}</div></div>`,
+    "imagen-protagonista": p => `<div class="det imagen-protagonista"><div class="cab centrada">${cab(p)}<p class="lead">${p.lead}</p></div>${diagrama(p.flujo)}<div class="pie-flujo"><p class="nota-suelta">${p.nota}</p>${sabias(p)}</div></div>`,
+    "autores": p => `<div class="det autores"><div class="txt">${cab(p)}<p class="lead">${p.lead}</p><div class="autores-grid">${p.autores.map(([a, y, tema, d], i) => `<div><div class="medallon" style="background-image:url('${I + ["amb-taller.jpg", "amb-bosque.jpg", "amb-hojas.jpg", "aut-trabajo.jpg"][i]}')"><i>${["🛠️", "🔁", "🌱", "⚖️"][i]}</i></div><b>${a}</b><em>${y}</em><small>${tema}</small><p>${d}</p></div>`).join("")}</div><details class="ante"><summary>Antecedentes revisados (estado del arte y de la técnica)</summary>${p.antecedentes.map(([g, r]) => `<div class="grupo"><b>${g}</b><span>${r}</span></div>`).join("")}</details>${sabias(p)}</div></div>`,
     "proyectos": (p, sel) => `<div class="det proyectos"><div class="cab">${cab(p)}<p class="lead">${p.lead}</p><div class="tabs" id="tabs">${Object.entries(PR).map(([id, f]) => `<button type="button" data-p="${id}" class="${id === sel ? "on" : ""}">${f.t}</button>`).join("")}</div></div><div id="visor"></div></div>`,
-    "imagen-alta-izq": p => `<div class="det imagen-alta-izq">${img(p)}<div class="txt">${cab(p)}<p class="lead">${p.lead}</p>${datos(p)}${lista(p.b, ["🧊", "📐", "🪵", "🧠"])}${sabias(p)}</div></div>`,
-    "manifiesto": p => `<div class="det manifiesto"><div class="mini"><img src="${I + p.img}" alt="${p.pie}"></div><div class="txt">${cab(p)}<p class="frase">${p.frase}</p><p class="lead">${p.lead}</p>${lista(p.b, ["🧑‍🔧", "📜", "🌐", "🔍"])}${sabias(p)}</div></div>`,
+    "imagen-alta-izq": p => `<div class="det imagen-alta-izq">${img(p)}<div class="txt">${cab(p)}<p class="lead">${p.lead}</p>${datos(p)}${lista(p.b, ["🧊", "📐", "🪵", "🧠"], "grid")}${sabias(p)}</div></div>`,
+    "manifiesto": p => `<div class="det manifiesto"><div class="fondo-foto" style="background-image:url('${I + p.img}')"></div><div class="txt">${cab(p)}<p class="frase">${p.frase}</p><p class="lead">${p.lead}</p>${lista(p.b, ["🧑‍🔧", "📜", "🌐", "🔍"], "escalonado")}${sabias(p)}</div></div>`,
     "numeradas": p => `<div class="det numeradas"><div class="txt">${cab(p)}<p class="lead">${p.lead}</p><ol class="numeradas-lista">${p.b.map(([t, d]) => `<li><b>${t}</b><span>${d}</span></li>`).join("")}</ol>${sabias(p)}</div>${img(p)}</div>`,
     "cierre": p => `<div class="det cierre"><div class="fondo"></div><div class="txt">${cab(p)}<p class="lead">${p.lead}</p>${lista(p.b, ["🤝", "📐", "⚖️", "🎓"])}${sabias(p)}<div class="gracias"><b>${p.gracias}</b><small><strong>${S.autor}</strong><br>${S.titulo}<br>${S.programa}<br>${S.universidad}</small></div></div></div>`
   };
@@ -222,11 +242,7 @@
   // ── Eventos ───────────────────────────────────────────────────
   bento.addEventListener("click", e => {
     const b = e.target.closest(".b"); if (!b) return;
-    if (b.dataset.foto) {
-      actual = 8; pintar();
-      const ex = expandir(b, LAYOUT.proyectos(P[7], b.dataset.foto), "", "proyecto", 8);
-      activarProyectos(ex, b.dataset.foto);
-    } else { actual = +b.dataset.n; pintar(); mostrarPaso(actual); }
+    actual = +b.dataset.n; pintar(); mostrarPaso(actual);
   });
   $("#comenzar").onclick = () => { bento.scrollIntoView({ behavior: reducido() ? "auto" : "smooth", block: "start" }); setTimeout(() => ir(1, true), reducido() ? 0 : 450); };
   $("#btn-refs").onclick = mostrarReferencias;
@@ -238,6 +254,6 @@
   // Enlaces directos: ?paso=8 · ?proyecto=cava · ?ciclo=2
   const q = new URLSearchParams(location.search);
   if (q.get("paso")) setTimeout(() => ir(+q.get("paso"), true), 300);
-  if (q.get("proyecto") && PR[q.get("proyecto")]) setTimeout(() => { const b = bento.querySelector(`.b[data-foto="${q.get("proyecto")}"]`); if (b) b.click(); else { actual = 8; pintar(); mostrarPaso(8, q.get("proyecto")); } }, 300);
+  if (q.get("proyecto") && PR[q.get("proyecto")]) setTimeout(() => { actual = 8; pintar(); mostrarPaso(8, q.get("proyecto")); }, 300);
   if (q.get("ciclo")) setTimeout(() => { const c = ciclo.querySelector(`.c[data-i="${q.get("ciclo")}"]`); if (c) { c.classList.add("activo"); pintarFichaCiclo(); } }, 300);
 })();
