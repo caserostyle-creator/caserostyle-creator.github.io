@@ -100,11 +100,11 @@ window.PASOS = [
     b: ["El pasante asume responsabilidades que generan aportes reales, <mark>sin espacios estructurados</mark> de aprendizaje, seguimiento o reconocimiento equivalentes.", "La legislación colombiana <mark>no obliga a remunerar</mark> las pasantías universitarias realizadas como requisito de grado; la Ley 789 de 2002 regula el contrato de aprendizaje, que es una figura distinta.", "La Organización Internacional del Trabajo (2015) advierte que, sin acompañamiento formativo, la pasantía puede convertirse en <mark>trabajo encubierto</mark>.", "El diseño sigue percibiéndose, en ocasiones, como una <mark>función operativa o de apoyo</mark>, y no como un aporte estratégico."],
     frase: "La pasantía puede llegar a convertirse en un mecanismo para <mark>suplir necesidades laborales</mark> bajo condiciones que priorizan la <mark>productividad sobre el aprendizaje</mark>." },
 
-  { n: 11, ico: "🛠️", sabias: "Documentar cómo se hizo cada mueble (planos, despieces, materiales) facilita repararlo o reutilizar sus piezas años después.", t: "Recomendaciones", s: "Cuatro propuestas para EcoDeco", layout: "numeradas", img: "cava-piezas1.jpg", pie: "Listado de piezas de la cava · Autor",
+  { n: 11, ico: "🛠️", sabias: "Documentar cómo se hizo cada mueble (planos, despieces, materiales) facilita repararlo o reutilizar sus piezas años después.", t: "Recomendaciones", s: "Cuatro propuestas para EcoDeco", layout: "numeradas", img: "ref-rack-instalado.jpg", pie: "Rack de TV en metal y madera · producto terminado e instalado · EcoDeco",
     lead: "Oportunidades de mejora identificadas durante la pasantía, tanto para la gestión de los proyectos como para la participación del diseñador en la empresa.",
     b: [["Fortalecer la documentación técnica", "Consolidar el uso de modelos 3D y planos estandarizados como medio de comunicación entre diseño y producción."], ["Implementar el seguimiento de proyectos", "Registrar el estado de cada proyecto, los cambios solicitados por los clientes y las modificaciones hechas en fabricación."], ["Delimitar las funciones del pasante", "Definir alcances y responsabilidades acordes con los objetivos formativos, para equilibrar aprendizaje y operación."], ["Abrir espacios de retroalimentación", "Programar seguimientos periódicos entre la empresa y el pasante para evaluar avances y resolver dificultades."]] },
 
-  { n: 12, ico: "✅", sabias: "Comprar menos y mejor, reparar y elegir materiales recuperados son gestos cotidianos que reducen la huella ambiental del hogar.", t: "Conclusiones", s: "Cierre", layout: "constelacion", img: "tipi-final.jpg", pie: "Tipi para gato · producto final · Autor",
+  { n: 12, ico: "✅", sabias: "Comprar menos y mejor, reparar y elegir materiales recuperados son gestos cotidianos que reducen la huella ambiental del hogar.", t: "Conclusiones", s: "Cierre", layout: "constelacion", img: "taller-banco.jpg", pie: "Taller de EcoDeco · fabricación",
     lead: "El diseñador industrial cumple un papel fundamental en los procesos productivos de las pequeñas empresas manufactureras. Reconocer ese aporte es también reconocer al diseñador en formación.",
     b: ["El diseño facilita la comunicación entre las necesidades del cliente y las posibilidades de fabricación.", "La documentación técnica, el modelado 3D y el conocimiento de los procesos contribuyen a la eficiencia y la calidad.", "Existe una tensión real entre el carácter formativo de la pasantía y las necesidades operativas de la empresa.", "Hay que fortalecer la relación entre la academia y el sector productivo sin perder de vista los objetivos formativos."],
     conclusiones: [["🤝", "Puente", "El diseño facilita la comunicación entre las necesidades del cliente y las posibilidades de fabricación."], ["📐", "Herramientas", "La documentación técnica, el modelado 3D y el conocimiento de los procesos contribuyen a la eficiencia y la calidad."], ["⚖️", "Tensión", "Existe una tensión real entre el carácter formativo de la pasantía y las necesidades operativas de la empresa."], ["🎓", "Academia y empresa", "Hay que fortalecer la relación entre la academia y el sector productivo sin perder de vista los objetivos formativos."]] },
@@ -136,4 +136,13 @@ window.REFERENCIAS = [
   "Reyes Forero, I. A. (2021). Estrategias de diseño de producto para una economía circular. ACTIO Journal of Technology in Design, Film Arts and Visual Communication, 5(1).",
   "Standing, G. (2013). El precariado: una nueva clase social. Pasado y Presente.",
   "Vargas Vanegas, C., Ocampo Cárdenas, H., & Parra Rincón, D. M. (2024). Economía sostenible: análisis de la cadena de valor en PYMES. Dosquebradas-Colombia. Revista Venezolana de Gerencia, 29(107), 1010–1024."
+];
+
+// Galería "+ proyectos" (paso 8): otros trabajos realizados durante la pasantía. Solo imágenes con su referencia.
+window.MAS_PROYECTOS = [
+  { t: "Rack de TV en metal y madera", imgs: [["ref-rack-3d.jpg", "Modelado 3D"], ["ref-rack-estructura.jpg", "Estructura metálica"], ["ref-rack-instalado.jpg", "Instalado en la vivienda"]] },
+  { t: "Mueble modular con puertas corredizas", imgs: [["ref-modular-3d.jpg", "Modelado 3D"]] },
+  { t: "Cajonera de listones", imgs: [["ref-cajonera-3d.jpg", "Modelado 3D"]] },
+  { t: "Banca de listones", imgs: [["ref-banca.jpg", "Producto en el taller"]] },
+  { t: "Fabricación en el taller", imgs: [["taller-marco.jpg", "Armado de un marco en pino"], ["taller-banco.jpg", "Banco de trabajo"]] }
 ];

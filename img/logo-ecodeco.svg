@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 660 200" role="img" aria-label="ecodeco diseño sostenible">
+  <defs>
+    <linearGradient id="verde" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5a9a4b"/><stop offset="1" stop-color="#2f6b32"/></linearGradient>
+  </defs>
+  <!-- emblema: círculo con hoja -->
+  <circle cx="92" cy="100" r="78" fill="url(#verde)"/>
+  <path d="M60 128 C62 90 90 62 132 58 C130 100 104 128 66 130 Z" fill="#fff" opacity=".96"/>
+  <path d="M66 128 C84 112 100 94 128 62" fill="none" stroke="#3f7a3a" stroke-width="5" stroke-linecap="round"/>
+  <path d="M84 116 C92 108 100 100 110 88 M76 122 C82 118 88 112 96 104" fill="none" stroke="#3f7a3a" stroke-width="3" stroke-linecap="round" opacity=".7"/>
+  <!-- marca -->
+  <text x="196" y="112" font-family="Sora, Arial Rounded MT Bold, Arial, sans-serif" font-size="82" font-weight="700" fill="#3f7a3a" letter-spacing="-2">ecodeco</text>
+  <text x="200" y="150" font-family="Sora, Arial, sans-serif" font-size="24" font-weight="600" fill="#6c9a5c" letter-spacing="4">diseño sostenible</text>
+</svg>
